@@ -46,11 +46,11 @@ function mostraTarefas() {
 
   listaArr.forEach((element, index) => {
     novoItemLista += `<div id="a${index}" ><input type="text" class="text" readonly id="id${index}" value="${element}"/>
-  <span onclick="confirmarTarefa(${index})" class="confirmar"><i class="far fa-check-circle"></i></span>
+  <span id="con${index}" onclick="confirmarTarefa(${index})" class="confirmar"><i class="far fa-check-circle"></i></span>
 
- <span id="button${index}" onclick="editTarefa(${index})" class="edit" ><i id="edit${index}" class="fas fa-edit"></i></span>
+ <span id="edit${index}" onclick="editTarefa(${index})" class="edit" ><i id="edit${index}" class="fas fa-edit"></i></span>
 
- <span onclick="salvarTarefa(${index})" class="salvar"><i class="far fa-check-circle"></i></span>
+ <span id="save${index}" onclick="salvarTarefa(${index})" class="salvar"><i class="far fa-check-circle"></i></span>
  <span onclick="deleteTarefa(${index})" id="delete"><i class="fas fa-trash"></i></span>
 </div>`;
   });
@@ -71,7 +71,7 @@ function deleteTarefa(index) {
     localStorage.setItem("Nova tarefa", JSON.stringify(listaArr));
     mostraTarefas();
   };
-  function salvarTarefa() {
+  function salvarTarefa(index) {
     let getLocal = localStorage.getItem("Nova tarefa");
     listaArr = JSON.parse(getLocal);
     // let dadoBase = input.value;
@@ -83,7 +83,9 @@ function deleteTarefa(index) {
   function editTarefa(index) {
     //   console.log(document.getElementsByClassName("edit"));
     const listaInput = document.getElementById(`id${index}`);
-    const listaButton = document.getElementById(`button${index}`);
+    const listaButtonEdit = document.getElementById(`edit${index}`);
+    const listaButtonSave = document.getElementById(`save${index}`);
+    const listaButtonCon = document.getElementById(`con${index}`);
 
     // const listaB = document.getElementById(`delete`);
 
