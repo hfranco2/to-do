@@ -48,9 +48,9 @@ function mostraTarefas() {
     novoItemLista += `<div id="a${index}" ><input type="text" class="text" readonly id="id${index}" value="${element}"/>
   <span id="con${index}" onclick="confirmarTarefa(${index})" class="confirmar"><i class="far fa-check-circle"></i></span>
 
- <span id="edit${index}" onclick="editTarefa(${index})" class="edit" ><i id="edit${index}" class="fas fa-edit"></i></span>
+ <span id="edit${index}" onclick="editTarefa(${index})" class="edit" ><i class="fas fa-edit"></i></span>
 
- <span id="save${index}" onclick="salvarTarefa(${index})" class="salvar"><i class="far fa-check-circle"></i></span>
+ <span id="save${index}" onclick="salvarTarefa(${index})" class="salvar"><i class="fas fa-upload"></i></span>
  <span onclick="deleteTarefa(${index})" id="delete"><i class="fas fa-trash"></i></span>
 </div>`;
   });
@@ -74,11 +74,33 @@ function deleteTarefa(index) {
   function salvarTarefa(index) {
     let getLocal = localStorage.getItem("Nova tarefa");
     listaArr = JSON.parse(getLocal);
-    // let dadoBase = input.value;
-    // let a = listaArr.map((i) => index);
-    console.log(listaArr);
+    let input = document.querySelector(`#id${index}`);
+    let dadoAtt = input.value;
+    listaArr[index] = dadoAtt;
+    localStorage.setItem("Nova tarefa", JSON.stringify(listaArr));
 
+    const listaButtonEdit = document.getElementById(`edit${index}`);
+    const listaButtonSave = document.getElementById(`save${index}`);
+    const listaButtonCon = document.getElementById(`con${index}`);
+    listaButtonEdit.classList.remove("active");
+    listaButtonCon.classList.remove("active");
+    listaButtonSave.classList.remove("active");
+    // let a = listaArr.map((i) => index);
+
+    mostraTarefas();
     // localStorage.setItem("item", JSON.stringify());
+  }
+  function confirmarTarefa(index) {
+    const listaButtonEdit = document.getElementById(`edit${index}`);
+
+    let input = document.querySelector(`#id${index}`);
+    if (input.classList != "text active") {
+      input.classList.add("active");
+      listaButtonEdit.classList.add("active");
+    } else {
+      input.classList.remove("active");
+      listaButtonEdit.classList.remove("active");
+    }
   }
   function editTarefa(index) {
     //   console.log(document.getElementsByClassName("edit"));
@@ -91,8 +113,11 @@ function deleteTarefa(index) {
 
     //   const listaEdit = document.getElementById(`a${index}`);
 
-    const att = listaInput.getAttribute("value", "");
     listaInput.removeAttribute("readonly");
+    listaButtonEdit.classList.add("active");
+    listaButtonCon.classList.add("active");
+    listaButtonSave.classList.add("active");
+    console.log(listaButtonEdit);
     // listaInput.setAttribute("value", "");
     // listaButton.setAttribute("onclick", "salvarTarefa()");
 

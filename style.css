@@ -172,6 +172,11 @@ header {
   border: none;
   border-radius: 5px;
 }
+.lista input.active {
+  text-decoration: line-through 3px;
+  background-color: rgb(119, 119, 119);
+  color: white;
+}
 #delete {
   position: absolute;
   right: -45px;
@@ -201,6 +206,9 @@ header {
   cursor: pointer;
   transition: all 0.3s ease;
 }
+.lista div:hover .confirmar.active {
+  left: -45px;
+}
 .lista div:hover .confirmar {
   position: absolute;
   left: 0;
@@ -220,18 +228,19 @@ header {
   text-align: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  display: none;
 }
-.lista div:hover .salvar {
+.lista div:hover .salvar.active {
   position: absolute;
-  right: 90px;
+  right: 45px;
   color: white;
-  background-color: red;
+  background-color: black;
   width: 45px;
   text-align: center;
   cursor: pointer;
 }
-
+.lista div:hover .edit.active {
+  right: -45px;
+}
 .edit {
   position: absolute;
   right: -45px;
