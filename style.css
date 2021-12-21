@@ -27,6 +27,7 @@ body {
   /* background-color: red; */
   justify-content: center;
   align-items: center;
+
   grid-template-areas:
     "dataDia dataDia"
     "input input"
@@ -34,7 +35,7 @@ body {
     "footer footer"
     "navbar navbar";
   grid-template-columns: 25% 1fr;
-  grid-template-rows: 2fr 2fr 12fr 1fr 2fr;
+  grid-template-rows: 2fr 2fr 12fr 1fr 1.7fr;
   grid-gap: 0;
   border-radius: 5px;
   border: solid 2px black;
@@ -60,30 +61,33 @@ body {
   overflow-y: auto;
 }
 
-#navCal {
-  height: 100%;
-  width: calc(100% / 3);
-  background-color: orange;
-  border-left: solid 1px;
-  border-bottom-left-radius: 5px;
-}
 #navDo {
   height: 100%;
-  width: calc(100% / 3);
+  width: 50%;
   border-left: solid 1px;
-  background-color: orange;
+  background-color: rgb(201, 201, 201);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 #navDone {
   height: 100%;
-  width: calc(100% / 3);
-  background-color: orange;
+  width: 50%;
+
   border-left: solid 1px;
   border-bottom-right-radius: 5px;
+  background-color: rgb(201, 201, 201);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 #dataDia {
   height: 100%;
   width: 100%;
-  background-color: brown;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   grid-area: dataDia;
 }
 header {
@@ -100,17 +104,36 @@ header {
   height: 100%;
   width: 100%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
+  align-items: center;
 }
 #inputTarefa input {
-  width: 85%;
-  height: 90%;
+  width: 78%;
+  height: 100%;
   border: 1px solid grey;
   border-radius: 5px;
   padding-left: 5px;
   outline: none;
 }
-#inputTarefa button,
+#inputTarefa button {
+  width: 10%;
+  height: 90%;
+  border: none;
+  outline: none;
+  background-color: rgb(15, 100, 211);
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-left: 5px;
+  opacity: 0.6;
+  pointer-events: none;
+}
+#inputTarefa button.active,
+.footer button.active {
+  opacity: 1;
+  pointer-events: auto;
+}
 .footer button {
   width: 10%;
   height: 90%;
@@ -122,20 +145,34 @@ header {
   cursor: pointer;
   border-radius: 5px;
   margin-left: 5px;
+  opacity: 0.6;
+  pointer-events: none;
+}
+.tarefa {
+  display: flex;
+  width: 500px;
+  height: 500px;
 }
 .lista {
   width: 90%;
 }
-.lista li {
-  list-style: none;
+.lista div {
   height: 45px;
   line-height: 45px;
   position: relative;
-  background-color: rgb(201, 201, 201);
   margin: 3px;
   overflow: hidden;
+  border-radius: 5px;
 }
-.lista li span {
+
+.lista input {
+  height: 100%;
+  width: 100%;
+  background-color: rgb(201, 201, 201);
+  border: none;
+  border-radius: 5px;
+}
+#delete {
   position: absolute;
   right: -45px;
   color: white;
@@ -145,7 +182,7 @@ header {
   cursor: pointer;
   transition: all 0.3s ease;
 }
-.lista li:hover span {
+.lista div:hover #delete {
   position: absolute;
   right: 0px;
   color: white;
@@ -154,6 +191,67 @@ header {
   text-align: center;
   cursor: pointer;
 }
+.confirmar {
+  position: absolute;
+  left: -45px;
+  color: white;
+  background-color: blaCK;
+  width: 45px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.lista div:hover .confirmar {
+  position: absolute;
+  left: 0;
+  color: white;
+  background-color: black;
+  width: 45px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.salvar {
+  position: absolute;
+  right: -45px;
+  color: white;
+  background-color: black;
+  width: 45px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: none;
+}
+.lista div:hover .salvar {
+  position: absolute;
+  right: 90px;
+  color: white;
+  background-color: red;
+  width: 45px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.edit {
+  position: absolute;
+  right: -45px;
+  color: white;
+  background-color: black;
+  width: 45px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.lista div:hover .edit {
+  position: absolute;
+  right: 45px;
+  color: white;
+  background-color: black;
+  width: 45px;
+  text-align: center;
+  cursor: pointer;
+}
+
 .footer {
   grid-area: footer;
   background-color: white;
@@ -163,6 +261,7 @@ header {
 }
 .footer button {
   width: 20%;
+
   padding: 1px;
 }
 @media screen and (max-width: 600px) {

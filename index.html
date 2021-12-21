@@ -12,43 +12,27 @@
     ></script>
   </head>
   <body>
-    <header>To-Do App</header>
+    <header>Tarefas</header>
     <div id="container">
       <nav id="navBar">
-        <div class="navOpt" id="navCal"></div>
-        <div class="navOpt" id="navDo"></div>
-        <div class="navOpt" id="navDone"></div>
+        <div class="navOpt" id="navDo">Todas as Tarefas</div>
+        <div class="navOpt" id="navDone">Realizadas</div>
       </nav>
 
-      <div id="dataDia"></div>
+      <div id="dataDia">Sabado, 18/12/2021</div>
 
-      <div id="inputTarefa">
+      <form id="inputTarefa">
         <input type="text" placeholder="Adicione a tarefa a fazer." />
-        <button><strong class="fas fa-plus"></strong></button>
-      </div>
+        <input type="submit" id="submit" /><strong class="fas fa-plus"></strong>
+      </form>
       <div id="conteudo">
-        <ul class="lista">
-          <li>
-            Comprar um pc gamer <span><i class="fas fa-trash"></i></span>
-          </li>
-          <li>
-            Completar tarefa anterior <span><i class="fas fa-trash"></i></span>
-          </li>
-          <li>
-            Criar um video para o youtube
-            <span><i class="fas fa-trash"></i></span>
-          </li>
-          <li>
-            Criar um site como portfolio
-            <span><i class="fas fa-trash"></i></span>
-          </li>
-        </ul>
+        <div class="lista"></div>
       </div>
       <div class="footer">
         <i>
           Você tem <span class="tarefasDoDia"></span> tarefas pendentes hoje.
         </i>
-        <button class="btn btn-clr">Clear All</button>
+        <button>Deletar</button>
       </div>
     </div>
 
