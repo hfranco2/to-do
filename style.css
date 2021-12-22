@@ -20,6 +20,63 @@ body {
     rgb(250, 187, 239)
   );
 }
+#calendarioBox {
+  background-color: rgb(0, 0, 0, 0.6);
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  display: none;
+
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+#calendarioControle {
+  height: 26rem;
+  width: 33rem;
+  background-color: white;
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 5px;
+  border: solid black 2px;
+}
+#controle {
+  position: relative;
+  height: 2rem;
+  width: 33rem;
+}
+#voltar {
+  left: 0;
+  position: absolute;
+  background-color: rgb(15, 100, 211);
+  height: 2rem;
+  width: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border-radius: 5px;
+  border: solid black 1px;
+  cursor: pointer;
+}
+#mensagem {
+  right: 100px;
+  position: center;
+  margin-top: 5px;
+}
+
+#calendario {
+  height: 23rem;
+  width: 33rem;
+  background-color: white;
+  display: flex;
+  flex-wrap: wrap;
+}
+.antes {
+  cursor: default !important;
+  background-color: #fffcff !important;
+  box-shadow: none !important;
+}
 #container {
   height: 35rem;
   width: 30rem;
@@ -80,6 +137,17 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all 0.3s ease;
+}
+#navDone:focus,
+#navDone:hover {
+  background-color: rgb(15, 100, 211);
+  color: white;
+}
+#navDo:focus,
+#navDo:hover {
+  background-color: rgb(15, 100, 211);
+  color: white;
 }
 #dataDia {
   height: 100%;
@@ -87,11 +155,19 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-
   grid-area: dataDia;
+  border: solid black 1px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+#dataDia:hover {
+  pointer-events: all;
+  cursor: pointer;
+  background-color: rgb(15, 100, 211);
+  color: white;
 }
 header {
-  color: rgb(148, 147, 147);
+  color: rgb(0, 0, 0);
   font-size: 30px;
   background-color: white;
   width: 200px;
@@ -273,9 +349,39 @@ header {
 
   padding: 1px;
 }
+.day {
+  width: 4rem;
+  padding: 10px;
+  height: 4rem;
+  font-size: 15px;
+  cursor: pointer;
+  box-sizing: border-box;
+  background-color: white;
+  margin: 5px;
+  box-shadow: 0px 0px 3px #cbd4c2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.day:hover {
+  background-color: #e8faed;
+}
+
+.day + #currentDay {
+  background-color: #e8f4fa;
+}
+.event {
+  font-size: 10px;
+  padding: 3px;
+  background-color: #58bae4;
+  color: white;
+  border-radius: 5px;
+  max-height: 55px;
+  overflow: hidden;
+}
 @media screen and (max-width: 600px) {
   #container {
-    width: 100vw;
-    height: 100vh;
+    width: 95vw;
+    height: 90vh;
   }
 }

@@ -13,13 +13,24 @@
   </head>
   <body>
     <header>Tarefas</header>
+    <div id="calendarioBox">
+      <div id="calendarioControle">
+        <div id="controle">
+          <div id="voltar"><i class="fas fa-long-arrow-alt-left"></i></div>
+          <div id="mensagem">Clique no dia para seleciona-lo:</div>
+        </div>
+        <div id="calendario">
+          <button id="voltar"><i class="fas fa-arrow-left"></i></button>
+        </div>
+      </div>
+    </div>
     <div id="container">
       <nav id="navBar">
         <div class="navOpt" id="navDo">Todas as Tarefas</div>
         <div class="navOpt" id="navDone">Realizadas</div>
       </nav>
 
-      <div id="dataDia">Sabado, 18/12/2021</div>
+      <div id="dataDia"></div>
 
       <form id="inputTarefa">
         <input type="text" placeholder="Adicione a tarefa a fazer." />

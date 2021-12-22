@@ -2,7 +2,120 @@ const input = document.querySelector("#inputTarefa input");
 const inputBtn = document.querySelector("#inputTarefa #submit");
 const lista = document.querySelector(".lista");
 const deleteAllBtn = document.querySelector(".footer button");
+const calendarioBox = document.querySelector("#calendarioBox");
+const calendario = document.querySelector("#calendario");
+const voltar = document.querySelector("#voltar");
+const dia = document.getElementById("dataDia");
+const dt = new Date();
+const day = dt.getDate();
+const month = dt.getMonth();
+const year = dt.getFullYear();
+const diasSemana = [
+  "domingo",
+  "segunda-feira",
+  "terça-feira",
+  "quarta-feira",
+  "quinta-feira",
+  "sexta-feira",
+  "sábado",
+];
+let nav = 0;
+let clicked = null;
 
+let eventos = localStorage.getItem("Nova tarefa ")
+  ? JSON.parse(localStorage.getItem("Nova tarefa"))
+  : [];
+
+function load() {
+  if (nav !== 0) {
+    dt.setMonth(new Date().getMonth() + nav);
+  }
+
+  const primeiroDiaDoMes = new Date(year, month, 1);
+
+  const diasNoMes = new Date(year, month + 1, 0).getDate();
+
+  const stringData = primeiroDiaDoMes.toLocaleDateString("pt-br", {
+    weekday: "long",
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+  });
+  const diasAntes = diasSemana.indexOf(stringData.split(", ")[0]);
+
+  dia.innerText = `${dt.toLocaleDateString("pt-br", {
+    weekday: "long",
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+  })} `;
+
+  calendario.innerHTML = "";
+
+  for (let i = 1; i <= diasAntes + diasNoMes; i++) {
+    const quadradoDia = document.createElement("div");
+    quadradoDia.classList.add("day");
+    const stringDia = `${i - diasAntes}/${month + 1}/${year}`;
+    quadradoDia.setAttribute("id", stringDia);
+
+    if (i > diasAntes) {
+      quadradoDia.innerText = i - diasAntes;
+      const eventoDia = eventos.find((e) => e.date === stringData);
+
+      if (i - diasAntes === day && nav === 0) {
+        quadradoDia.id = "currentDay";
+      }
+
+      if (eventoDia) {
+        const eventDiv = document.createElement("div");
+        eventDiv.classList.add("event");
+        eventDiv.innerText = eventoDia.title;
+        quadradoDia.appendChild(eventDiv);
+      }
+
+      quadradoDia.addEventListener("click", () => selecionaDia(stringDia));
+    } else {
+      quadradoDia.classList.add("antes");
+    }
+
+    calendario.appendChild(quadradoDia);
+  }
+}
+load();
+const diaAtual = new Date(year, month, day);
+selecionaDia();
+function selecionaDia(dia) {
+  if (dia == null) {
+    dia = diaAtual.toLocaleDateString("pt-br", {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+    });
+  }
+  let diaBase = dia;
+  let getLocal = localStorage.getItem("Dia");
+  if (getLocal == null) {
+    listaArr = [];
+  } else {
+    listaArr = JSON.parse(getLocal); // transformando json em objeto
+  }
+  if (listaArr.find((e) => diaBase)) {
+  } else {
+    listaArr.push(diaBase);
+  }
+  localStorage.setItem("Dia", JSON.stringify(listaArr)); // transformando objeto em string
+  mostraTarefas();
+
+  //mudar o status do  calendario para display none
+  //preciso armazenar setar o dia que as tarefas vao ser salvas
+  calendarioBox.style.display = "none";
+}
+dia.onclick = () => {
+  calendarioBox.style.display = "flex";
+};
+voltar.onclick = () => {
+  calendarioBox.style.display = "none";
+};
 //aqui eu pego o valor colocado no input pelo usuario
 input.onkeyup = () => {
   let dadoBase = input.value;
@@ -85,6 +198,7 @@ function deleteTarefa(index) {
     listaButtonEdit.classList.remove("active");
     listaButtonCon.classList.remove("active");
     listaButtonSave.classList.remove("active");
+
     // let a = listaArr.map((i) => index);
 
     mostraTarefas();
@@ -114,10 +228,13 @@ function deleteTarefa(index) {
     //   const listaEdit = document.getElementById(`a${index}`);
 
     listaInput.removeAttribute("readonly");
+
     listaButtonEdit.classList.add("active");
     listaButtonCon.classList.add("active");
     listaButtonSave.classList.add("active");
-    console.log(listaButtonEdit);
+    listaInput.focus();
+    listaInput.select();
+    // console.log(listaButtonEdit);
     // listaInput.setAttribute("value", "");
     // listaButton.setAttribute("onclick", "salvarTarefa()");
 
