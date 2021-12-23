@@ -21,11 +21,47 @@ const diasSemana = [
 ];
 let nav = 0;
 let clicked = null;
+let a = []
+localStorage.setItem("teste",JSON.stringify(a));
+const diaAtual = new Date(year, month, day);
+function primeiroLoad(){
+ let pLoad= localStorage.getItem("teste")
+  if (pLoad==null | pLoad== "" | pLoad== undefined)
+localStorage.setItem("teste",JSON.stringify(diaAtual.toLocaleDateString("pt-br", {
+  year: "numeric",
+  month: "numeric",
+  day: "numeric",
+})
+));}
+primeiroLoad()
+console.log(localStorage.getItem("teste"))
+
+// function teste(dia){
+//   const diaAtual = new Date(year, month, day);
+//   if (dia==undefined){
+//     a=diaAtual.toLocaleDateString("pt-br", {
+//       year: "numeric",
+//       month: "numeric",
+//       day: "numeric",
+//     });
+//   }else{
+//     a=dia
+//   }
+//   }
 
 let eventos = localStorage.getItem("Nova tarefa ")
   ? JSON.parse(localStorage.getItem("Nova tarefa"))
   : [];
-
+  load()
+  selecionaDia()
+  function diaSelecionado(selecionado){
+    
+    let getLocalDay = localStorage.getItem("teste");
+  listaArrDay = JSON.parse(getLocalDay); 
+  console.log(listaArrDay)
+    dia.innerText = listaArrDay;
+    // dia.innerText = selecionado;
+   }
 function load() {
   if (nav !== 0) {
     dt.setMonth(new Date().getMonth() + nav);
@@ -42,14 +78,14 @@ function load() {
     day: "numeric",
   });
   const diasAntes = diasSemana.indexOf(stringData.split(", ")[0]);
-
-  dia.innerText = `${dt.toLocaleDateString("pt-br", {
-    weekday: "long",
-    year: "numeric",
-    month: "numeric",
-    day: "numeric",
-  })} `;
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // dia.innerText = `${dt.toLocaleDateString("pt-br", {
+  //   weekday: "long",
+  //   year: "numeric",
+  //   month: "numeric",
+  //   day: "numeric",
+  // })} `;
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
   calendario.innerHTML = "";
 
   for (let i = 1; i <= diasAntes + diasNoMes; i++) {
@@ -81,33 +117,50 @@ function load() {
     calendario.appendChild(quadradoDia);
   }
 }
+
 load();
-const diaAtual = new Date(year, month, day);
-selecionaDia();
+
+
 function selecionaDia(dia) {
-  if (dia == null) {
+  if ((dia == undefined) | (dia == null)) {
     dia = diaAtual.toLocaleDateString("pt-br", {
       year: "numeric",
       month: "numeric",
       day: "numeric",
     });
   }
+
   let diaBase = dia;
   let getLocal = localStorage.getItem("Dia");
+  // console.log(diaBase);
   if (getLocal == null) {
     listaArr = [];
   } else {
     listaArr = JSON.parse(getLocal); // transformando json em objeto
   }
-  if (listaArr.find((e) => diaBase)) {
+  if (listaArr.find(e => e == diaBase)) {
+  //  console.log("ja tem")
   } else {
     listaArr.push(diaBase);
   }
   localStorage.setItem("Dia", JSON.stringify(listaArr)); // transformando objeto em string
-  mostraTarefas();
+  // console.log(listaArr);
+ 
+ 
+  // teste(diaBase)
+  // console.log(teste())
+  limpandoArrayDiaAtual = []
+  
+    localStorage.setItem("teste", JSON.stringify(limpandoArrayDiaAtual));
+    // console.log(diaBase)
+    localStorage.setItem("teste", JSON.stringify(diaBase));
 
-  //mudar o status do  calendario para display none
-  //preciso armazenar setar o dia que as tarefas vao ser salvas
+  
+  // localStorage.setItem(a, JSON.stringify(diaBase));
+  // console.log(a)
+  diasArr()
+  diaSelecionado(diaBase)
+  mostraTarefas();
   calendarioBox.style.display = "none";
 }
 dia.onclick = () => {
@@ -126,22 +179,75 @@ input.onkeyup = () => {
     inputBtn.classList.remove("active");
   }
 };
-mostraTarefas();
-inputBtn.onclick = () => {
+
+// console.log()
+inputBtn.onclick = () => { 
+  let getLocalDay = localStorage.getItem("teste");
+  listaArrDay = JSON.parse(getLocalDay); 
+ 
+  
+  
+  
+ 
+  //criar o array do dia que ta selecionado
+  //o valor do input seja colocado no array do dia que ta selecionado
+  
   let dadoBase = input.value;
-  let getLocal = localStorage.getItem("Nova tarefa");
+  let getLocal = localStorage.getItem(listaArrDay);
   if (getLocal == null) {
     listaArr = []; // aqui é criado um array para armazenar o json do input
   } else {
     listaArr = JSON.parse(getLocal); // transformando json em objeto
   }
+  console.log(getLocal)
   listaArr.push(dadoBase);
-  localStorage.setItem("Nova tarefa", JSON.stringify(listaArr)); // transformando objeto em string
+  localStorage.setItem(listaArrDay, JSON.stringify(listaArr)); // transformando objeto em string
   mostraTarefas();
+  diaSelecionado()
 };
+function diasArr() {
+  let getLocal = localStorage.getItem("Dia");
+  listaArr = JSON.parse(getLocal);
+  // console.log(listaArr)
+  if (i= 0, i<=listaArr.length, i++){
+    localStorage.setItem(valorAtual[i].index, JSON.stringify([]));
+  
+  }
+}
+// function forDias(diaBase) {
+//   diaBase.forEach(){
+
+//   };
+// }
 
 function mostraTarefas() {
-  let getLocal = localStorage.getItem("Nova tarefa");
+  // let getLocal = localStorage.getItem("Nova tarefa");
+  // if (getLocal == null) {
+  //   listaArr = [];
+  // } else {
+  //   listaArr = JSON.parse(getLocal);
+  // }
+  let getLocalDay = localStorage.getItem("teste");
+  listaArrDay = JSON.parse(getLocalDay);
+  let getLocal = localStorage.getItem(listaArrDay);
+ 
+  
+  // console.log(getLocal)
+  // let x = 0;
+  // console.log(diaSelecionado())
+  // if (diaSelecionado() == undefined){
+  //   const diaAtual = new Date(year, month, day);
+  //   x = diaAtual.toLocaleDateString("pt-br", {
+  //     year: "numeric",
+  //     month: "numeric",
+  //     day: "numeric",
+  //   });
+  // }else{
+  //   x = diaSelecionado()
+  // }
+  // let getLocal = localStorage.getItem(x);
+  // console.log(x)
+  
   if (getLocal == null) {
     listaArr = [];
   } else {
@@ -171,26 +277,32 @@ function mostraTarefas() {
   input.value = "";
 }
 function deleteTarefa(index) {
-  let getLocal = localStorage.getItem("Nova tarefa");
+  let getLocalDay = localStorage.getItem("teste");
+  listaArrDay = JSON.parse(getLocalDay);
+  let getLocal = localStorage.getItem(listaArrDay);
   listaArr = JSON.parse(getLocal);
   listaArr.splice(index, 1); // deletando o item pelo index
-  localStorage.setItem("Nova tarefa", JSON.stringify(listaArr));
+  localStorage.setItem(listaArrDay, JSON.stringify(listaArr));
   mostraTarefas();
 }
 {
   //deletar todos os itens
   deleteAllBtn.onclick = () => {
+    let getLocalDay = localStorage.getItem("teste");
+    listaArrDay = JSON.parse(getLocalDay);
     listaArr = [];
-    localStorage.setItem("Nova tarefa", JSON.stringify(listaArr));
+    localStorage.setItem(listaArrDay, JSON.stringify(listaArr));
     mostraTarefas();
   };
   function salvarTarefa(index) {
-    let getLocal = localStorage.getItem("Nova tarefa");
+    let getLocalDay = localStorage.getItem("teste");
+  listaArrDay = JSON.parse(getLocalDay);
+    let getLocal = localStorage.getItem(listaArrDay);
     listaArr = JSON.parse(getLocal);
     let input = document.querySelector(`#id${index}`);
     let dadoAtt = input.value;
     listaArr[index] = dadoAtt;
-    localStorage.setItem("Nova tarefa", JSON.stringify(listaArr));
+    localStorage.setItem(listaArrDay, JSON.stringify(listaArr));
 
     const listaButtonEdit = document.getElementById(`edit${index}`);
     const listaButtonSave = document.getElementById(`save${index}`);
