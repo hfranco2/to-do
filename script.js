@@ -85,29 +85,32 @@ load();
 const diaAtual = new Date(year, month, day);
 selecionaDia();
 function selecionaDia(dia) {
-  if (dia == null) {
+  if ((dia == undefined) | (dia == null)) {
     dia = diaAtual.toLocaleDateString("pt-br", {
       year: "numeric",
       month: "numeric",
       day: "numeric",
     });
   }
+
   let diaBase = dia;
   let getLocal = localStorage.getItem("Dia");
+  console.log(diaBase);
   if (getLocal == null) {
     listaArr = [];
   } else {
     listaArr = JSON.parse(getLocal); // transformando json em objeto
   }
-  if (listaArr.find((e) => diaBase)) {
+  if (listaArr.find(e => e == diaBase)) {
+   console.log("ja tem")
   } else {
     listaArr.push(diaBase);
   }
   localStorage.setItem("Dia", JSON.stringify(listaArr)); // transformando objeto em string
+  // console.log(listaArr);
+  diasArr()
   mostraTarefas();
 
-  //mudar o status do  calendario para display none
-  //preciso armazenar setar o dia que as tarefas vao ser salvas
   calendarioBox.style.display = "none";
 }
 dia.onclick = () => {
@@ -128,6 +131,9 @@ input.onkeyup = () => {
 };
 mostraTarefas();
 inputBtn.onclick = () => {
+  
+  //criar o array do dia que ta selecionado
+  //o valor do input seja colocado no array do dia que ta selecionado
   let dadoBase = input.value;
   let getLocal = localStorage.getItem("Nova tarefa");
   if (getLocal == null) {
@@ -139,6 +145,20 @@ inputBtn.onclick = () => {
   localStorage.setItem("Nova tarefa", JSON.stringify(listaArr)); // transformando objeto em string
   mostraTarefas();
 };
+function diasArr() {
+  let getLocal = localStorage.getItem("Dia");
+  listaArr = JSON.parse(getLocal);
+  listaArr.forEach((valorAtual) => {
+    var nome = valorAtual;
+    listaArr = [];
+    localStorage.setItem(nome, JSON.stringify(listaArr));
+  });
+}
+// function forDias(diaBase) {
+//   diaBase.forEach(){
+
+//   };
+// }
 
 function mostraTarefas() {
   let getLocal = localStorage.getItem("Nova tarefa");
