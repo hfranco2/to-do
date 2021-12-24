@@ -19,6 +19,7 @@ body {
     rgb(15, 100, 211),
     rgb(250, 187, 239)
   );
+  overflow: hidden;
 }
 #calendarioBox {
   background-color: rgb(0, 0, 0, 0.6);
@@ -77,7 +78,7 @@ body {
   background-color: #fffcff !important;
   box-shadow: none !important;
 }
-#container {
+.container {
   height: 35rem;
   width: 30rem;
   display: grid;
@@ -98,6 +99,31 @@ body {
   border: solid 2px black;
   background-color: white;
 }
+#container1{
+display: none;
+}
+#container2{
+
+display: none;
+grid-template-areas:
+    
+    "conteudo conteudo"  
+    "navbar navbar";
+    
+    grid-template-rows:   15fr 1.5fr;
+}
+
+#container3{
+  /* display: none; */
+  grid-template-areas:
+    
+    "conteudo conteudo"    
+    "navbar navbar";
+    
+    grid-template-rows:   15fr 1.5fr;
+}
+
+
 /*  */
 #navBar {
   /* background-color: blue; */
@@ -106,7 +132,7 @@ body {
   grid-area: navbar;
   display: flex;
 }
-#conteudo {
+#container1 .conteudo {
   background-color: white;
   height: 100%;
   width: 100%;
@@ -117,6 +143,30 @@ body {
   max-height: 300px;
   overflow-y: auto;
 }
+#container2 .conteudo {
+  background-color: white;
+  height: 100%;
+  width: 100%;
+  grid-area: conteudo;
+  display: flex;
+  flex-direction: column;
+ 
+  align-items: center;
+  
+  overflow-y: auto;
+}
+#container3 .conteudo {
+  background-color: white;
+  height: 100%;
+  width: 100%;
+  grid-area: conteudo;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+ 
+  overflow-y: auto;
+}
+
 
 #navDo {
   height: 100%;
@@ -149,7 +199,7 @@ body {
   background-color: rgb(15, 100, 211);
   color: white;
 }
-#dataDia {
+.dataDia {
   height: 100%;
   width: 100%;
   display: flex;
@@ -160,7 +210,7 @@ body {
   border-radius: 5px;
   transition: all 0.3s ease;
 }
-#dataDia:hover {
+.dataDia:hover {
   pointer-events: all;
   cursor: pointer;
   background-color: rgb(15, 100, 211);
@@ -173,6 +223,7 @@ header {
   width: 200px;
   border-radius: 10px;
   margin: 10px;
+ 
 }
 #inputTarefa {
   grid-area: input;
@@ -229,7 +280,7 @@ header {
   width: 500px;
   height: 500px;
 }
-.lista {
+.lista{
   width: 90%;
 }
 .lista div {
@@ -378,6 +429,14 @@ header {
   border-radius: 5px;
   max-height: 55px;
   overflow: hidden;
+}
+.text2{
+  height: 100%;
+  width: 100%;
+  background-color: rgb(15, 100, 211) !important; 
+  border: none;
+  border-radius: 5px;
+  color: white;
 }
 @media screen and (max-width: 600px) {
   #container {
