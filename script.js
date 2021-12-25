@@ -153,9 +153,11 @@ function selecionaDia(dia) {
   
   // localStorage.setItem(a, JSON.stringify(diaBase));
   // console.log(a)
-  diasArr()
+  
   diaSelecionado(diaBase)
+  
   mostraTarefas();
+  diasArr()
   calendarioBox.style.display = "none";
 }
 dia.onclick = () => {
@@ -199,16 +201,28 @@ inputBtn.onclick = () => {
   localStorage.setItem(listaArrDay, JSON.stringify(listaArr)); // transformando objeto em string
   mostraTarefas();
   diaSelecionado()
+  diasArr()
 };
 function diasArr() {
   let getLocal = localStorage.getItem("Dia");
-  listaArr = JSON.parse(getLocal);
-  // console.log(listaArr)
-  if (i= 0, i<=listaArr.length, i++){
-    localStorage.setItem(valorAtual[i].index, JSON.stringify([]));
+  let listaArrDay = JSON.parse(getLocal); 
+  let listaArr = listaArrDay.map((e)=>e);
+  // console.log(listaArr.length)
   
+  // console.log(listaArr.length)
+  for(z= 0; z<listaArr.length; z++){
+    let getLocal2 = localStorage.getItem(listaArr[z]);
+  let listaArrDay2 = JSON.parse(getLocal2); 
+    // console.log(listaArr[z])
+  
+  if(listaArrDay2==undefined|listaArrDay2==[]|listaArrDay2==null){
+    localStorage.setItem(listaArr[z], JSON.stringify([]));
+  }
+    
+  //  console.log(listaArr[z])
   }
 }
+
 // function forDias(diaBase) {
 //   diaBase.forEach(){
 
@@ -246,6 +260,7 @@ function mostraTarefas(aaa) {
   });
   lista.innerHTML = novoItemLista; // adicionando os li na ul
   input.value = "";
+  
 }
 function deleteTarefa(index) {
   let getLocalDay = localStorage.getItem("teste");
@@ -289,6 +304,10 @@ function deleteTarefa(index) {
   }
   function confirmarTarefa(index) {
     const listaButtonEdit = document.getElementById(`edit${index}`);
+    let getLocalDay = localStorage.getItem("confirmados");
+    listaArr= JSON.parse(getLocalDay);
+
+    
 
     let input = document.querySelector(`#id${index}`);
     if (input.classList != "text active") {
@@ -328,50 +347,80 @@ function deleteTarefa(index) {
     //   console.log(listaEdit);
   }
   function mostraTodasTarefas() {    
+    let tt=""
     let getLocalDay = localStorage.getItem("Dia");
     listaArrDay = JSON.parse(getLocalDay);
-    let getLocalEvent = localStorage.getItem("teste");
-    listaArrEvent = JSON.parse(getLocalEvent);
+    let listaArrDay3= listaArrDay.map(e=>e)
+    
+    // let getLocalEvent = listaArrDay3.map((e)=>localStorage.getItem(e) );
+    // console.log(getLocalEvent)
+    
+    
+   
+    listaArrDay3.map((e,index)=> {tt +=`<div id="a2${e}" ><input type="text" class="text2" readonly id="id2${e}" value="${e}"/></div>`
+    let getLocalEvent = localStorage.getItem(e); 
+    listaArrEvent = JSON.parse(getLocalEvent); 
     let getLocal = localStorage.getItem(listaArrEvent);
-    listaArr = JSON.parse(getLocal);   
-  let tt=""
-  function diastotal(){    
-    for (i =0; i<listaArrDay.length; i++){
-      tt +=`<div id="a2${listaArrDay[i]}" ><input type="text" class="text2" readonly id="id2${listaArrDay[i]}" value="${listaArrDay[i]}"/></div>`
-    let getLocal2 = localStorage.getItem(listaArrDay[i]);
-    listaArr2 = JSON.parse(getLocal2);
-      for (u =0; u<listaArr2.length; u++){
-         tt += `<div id="a${listaArr2[u]}" ><input type="text" class="text" readonly id="id${listaArr2[u]}" value="${listaArr2[u]}"/>        
-      </div>`;
-      }     
-    }   
-    }
-    diastotal()   
+    
+    // console.log(getLocalEvent)
+    if(listaArrEvent!=[]|listaArrEvent!=undefined|listaArrEvent!=null){
+      console.log(listaArrEvent)
+  tt += `<div id="a${listaArrEvent}" ><input type="text" class="text" readonly id="id${listaArrEvent}" value="${listaArrEvent}"/>        
+     </div>`;}})
+    // let listaArrDay4= listaArrDay.map(e=>e)
+  
+    // for (i =0; i<listaArrDay3.length; i++){
+      
+    //   // console.log(listaArrDay)
+    //   // let getLocal2 = localStorage.getItem(listaArrDay3[i]);
+      
+    // // listaArr2 = JSON.parse(getLocal2);
+    
+    // console.log(listaArr3)
+    // if(listaArr3==undefined|listaArr3==null)
+    //   {listaArr=="1"
+    // for (k =0; k<listaArr3.length ; k++){
+      
+      
+      
+    //   tt +=`<div id="a2${listaArrDay[k]}" ><input type="text" class="text2" readonly id="id2${listaArrDay[k]}" value="${listaArrDay[k]}"/></div>`
+    
+    // // console.log(listaArr2.length)
+    //   for (u =0; u<listaArr3.length ; u++){
+    //      tt += `<div id="a${listaArr3[u]}" ><input type="text" class="text" readonly id="id${listaArr3[u]}" value="${listaArr3[u]}"/>        
+    //   </div>`;
+    //   }     
+    // } }  }
+   
     lista2.innerHTML = tt; // adicionando os li na ul
-    input.value = "";  
+    //  console.log(listaArr3)
   }   
   mostraTodasTarefas()
-   function mostraTarefasConcluidas() {    
-    let getLocalDay = localStorage.getItem("Dia");
-    listaArrDay = JSON.parse(getLocalDay);
-    let getLocalEvent = localStorage.getItem("teste");
-    listaArrEvent = JSON.parse(getLocalEvent);
-    let getLocal = localStorage.getItem(listaArrEvent);
-    listaArr = JSON.parse(getLocal);   
-  let tt=""
-  function diastotal(){    
-    for (i =0; i<listaArrDay.length; i++){
-      tt +=`<div id="a2${listaArrDay[i]}" ><input type="text" class="text2" readonly id="id${listaArrDay[i]}" value="${listaArrDay[i]}"/></div>`
-    let getLocal2 = localStorage.getItem(listaArrDay[i]);
-    listaArr2 = JSON.parse(getLocal2);
-      for (u =0; u<listaArr2.length; u++){
-         tt += `<div id="a${listaArr2[u]}" ><input type="text" class="text" readonly id="id${listaArr2[u]}" value="${listaArr2[u]}"/>        
-      </div>`;
-      }     
-    }   
-    }
-    diastotal()   
-    lista3.innerHTML = tt; // adicionando os li na ul
-    input.value = "";  
-  }   
-  mostraTarefasConcluidas()
+ 
+  //  function mostraTarefasConcluidas() {    
+  //   let getLocalDay = localStorage.getItem("Dia");
+  //   listaArrDay = JSON.parse(getLocalDay);
+  //   let getLocalEvent = localStorage.getItem("teste");
+  //   listaArrEvent = JSON.parse(getLocalEvent);
+  //   let getLocal = localStorage.getItem(listaArrEvent);
+  //   listaArr = JSON.parse(getLocal);   
+  // let tt=""
+  // function diastotal(){    
+  //   for (i =0; i<listaArrDay.length; i++){
+  //     tt +=`<div id="a2${listaArrDay[i]}" ><input type="text" class="text2" readonly id="id${listaArrDay[i]}" value="${listaArrDay[i]}"/></div>`
+  //   let getLocal2 = localStorage.getItem(listaArrDay[i]);
+  //   listaArr2 = JSON.parse(getLocal2);
+  //   if (listaArr2== null|listaArr2==undefined){
+  //     listaArr2=""
+  //   }
+  //     for (u =0; u<listaArr2.length; u++){
+  //        tt += `<div id="a${listaArr2[u]}" ><input type="text" class="text" readonly id="id${listaArr2[u]}" value="${listaArr2[u]}"/>        
+  //     </div>`;
+  //     }     
+  //   }   
+  //   }
+  //   diastotal()   
+  //   lista3.innerHTML = tt; // adicionando os li na ul
+  //   input.value = "";  
+  // }   
+  // mostraTarefasConcluidas()

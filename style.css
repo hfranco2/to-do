@@ -100,7 +100,7 @@ body {
   background-color: white;
 }
 #container1{
-display: none;
+/* display: none; */
 }
 #container2{
 
@@ -114,7 +114,7 @@ grid-template-areas:
 }
 
 #container3{
-  /* display: none; */
+  display: none;
   grid-template-areas:
     
     "conteudo conteudo"    
