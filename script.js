@@ -330,9 +330,10 @@ function deleteTarefa(index) {
     listaButtonCon.classList.add("active");
     listaButtonSave.classList.add("active");
     listaInput.focus();
+     listaInput.select();
     listaInput.setAttribute('inputmode','text')
     listaInput.setAttribute('enterkeyhint','go')
-    // listaInput.select();
+   
     
   }
   function mostraTodasTarefas() {    
