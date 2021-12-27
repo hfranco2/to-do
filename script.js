@@ -322,6 +322,8 @@ function deleteTarefa(index) {
   function editTarefa(index) {
     //aqui eu altero a propriedade do input e seu estilo para poder editar e depois chamar a fuinção salvarTarefa
     const listaInput = document.getElementById(`id${index}`);
+    const listaDiv = document.getElementById(`a${index}`);
+  
     const listaButtonEdit = document.getElementById(`edit${index}`);
     const listaButtonSave = document.getElementById(`save${index}`);
     const listaButtonCon = document.getElementById(`con${index}`);
@@ -330,10 +332,13 @@ function deleteTarefa(index) {
     listaButtonCon.classList.add("active");
     listaButtonSave.classList.add("active");
     listaInput.focus();
-     listaInput.select();
+    listaInput.select();
     listaInput.setAttribute('inputmode','text')
     listaInput.setAttribute('enterkeyhint','go')
-   
+    listaDiv.focus();
+    listaDiv.select();
+    listaDiv.setAttribute('inputmode','text')
+    listaDiv.setAttribute('enterkeyhint','go')
     
   }
   function mostraTodasTarefas() {    
