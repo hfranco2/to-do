@@ -448,7 +448,7 @@ header {
   color: white;
 }
 @media screen and (max-width: 600px) {
-  #container {
+  #container1,#container2,#container3,#calendarioBox  {
     width: 95vw;
     height: 90vh;
   }
