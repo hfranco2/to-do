@@ -168,7 +168,7 @@ grid-template-areas:
 }
 
 
-#navDo {
+#navDo1,#navDo2,#navDo3 {
   height: 100%;
   width: 50%;
   border-left: solid 1px;
@@ -177,7 +177,7 @@ grid-template-areas:
   justify-content: center;
   align-items: center;
 }
-#navDone {
+#navDone1,#navDone2,#navDone3 {
   height: 100%;
   width: 50%;
 
@@ -189,13 +189,17 @@ grid-template-areas:
   align-items: center;
   transition: all 0.3s ease;
 }
-#navDone:focus,
-#navDone:hover {
+#navDone1:focus,
+#navDone1:hover,#navDone2:focus,
+#navDone2:hover,#navDone3:focus,
+#navDone3:hover {
   background-color: rgb(15, 100, 211);
   color: white;
 }
-#navDo:focus,
-#navDo:hover {
+#navDo1:focus,
+#navDo1:hover,#navDo2:focus,
+#navDo2:hover,#navDo3:focus,
+#navDo3:hover {
   background-color: rgb(15, 100, 211);
   color: white;
 }
@@ -436,6 +440,11 @@ header {
   background-color: rgb(15, 100, 211) !important; 
   border: none;
   border-radius: 5px;
+  color: white;
+}
+.text3{
+  text-decoration: line-through 1px;
+  background-color: rgb(119, 119, 119)!important;
   color: white;
 }
 @media screen and (max-width: 600px) {
