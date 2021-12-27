@@ -331,7 +331,7 @@ function deleteTarefa(index) {
     listaButtonSave.classList.add("active");
     listaInput.focus();
     
-    listaInput.setAttribute('inputmode','text')
+    listaInput.setAttribute('enterkeyhint','go')
     // listaInput.select();
     
   }
