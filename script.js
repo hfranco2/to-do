@@ -336,7 +336,7 @@ function deleteTarefa(index) {
     listaInput.setAttribute('inputmode','text')
     listaInput.setAttribute('enterkeyhint','go')
     listaDiv.focus();
-    listaDiv.select();
+    // listaDiv.select();
     listaDiv.setAttribute('inputmode','text')
     listaDiv.setAttribute('enterkeyhint','go')
     
